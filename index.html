@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coinzilla | Join The Top Finance & Crypto Ad Network</title>
+  <meta name="description" content="Reconstruct high-performing crypto advertising campaigns with Coinzilla's premier digital ad network. Instant ROI estimation, native ads, press releases, and publisher monetization." />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              accent: '#00e5ff',
+              green: '#10b981'
+            },
+            dark: {
+              950: '#07090e',
+              900: '#0b0f19',
+              850: '#101626',
+              800: '#161f36',
+              700: '#202b48',
+              600: '#2f3e66'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #07090e;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .glow-effect {
+      box-shadow: 0 0 40px -10px rgba(37, 99, 235, 0.45);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 30px -8px rgba(0, 229, 255, 0.35);
+    }
+    .crypto-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glass-card {
+      background: rgba(16, 22, 38, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.25);
+    }
+    .pulse-dot {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(1.3); }
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07090e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #202b48;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b82f6;
+    }
+  </style>
+</head>
+<body class="min-h-screen crypto-grid flex flex-col justify-between selection:bg-brand-600 selection:text-white">
+
+  <!-- Top Live Currency & Network Ticker -->
+  <header class="border-b border-white/5 bg-dark-950/90 backdrop-blur-md sticky top-0 z-50 text-xs py-2 px-4 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-6 overflow-x-auto py-1 scrollbar-none">
+        <div class="flex items-center space-x-2">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 pulse-dot"></span>
+          <span class="text-gray-400 font-medium">Network Status:</span>
+          <span class="text-emerald-400 font-semibold">100% Operational (650+ Publishers Active)</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-4 border-l border-white/10 pl-6 text-gray-300 font-mono">
+          <span>BTC: <b class="text-white" id="btc-rate">$64,820</b> <span class="text-emerald-400 text-[10px]">+2.4%</span></span>
+          <span>ETH: <b class="text-white" id="eth-rate">$3,480</b> <span class="text-emerald-400 text-[10px]">+1.8%</span></span>
+          <span>USDT: <b class="text-white">$1.00</b></span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center bg-dark-900 border border-white/10 rounded-lg px-2 py-1">
+          <label for="currency-select" class="text-gray-400 mr-2 text-[11px]">Currency:</label>
+          <select id="currency-select" onchange="updateGlobalCurrency(this.value)" class="bg-transparent text-white font-medium focus:outline-none cursor-pointer">
+            <option value="EUR" class="bg-dark-900 text-white">EUR (€)</option>
+            <option value="USD" class="bg-dark-900 text-white">USD ($)</option>
+            <option value="BTC" class="bg-dark-900 text-white">BTC (₿)</option>
+            <option value="ETH" class="bg-dark-900 text-white">ETH (Ξ)</option>
+            <option value="USDT" class="bg-dark-900 text-white">USDT (₮)</option>
+          </select>
+        </div>
+        <div class="hidden sm:flex items-center space-x-3 text-gray-300">
+          <a href="#calculator" class="hover:text-brand-accent transition-colors"><i class="fa-solid fa-calculator mr-1 text-brand-500"></i> ROI Calc</a>
+          <a href="#formats" class="hover:text-brand-accent transition-colors"><i class="fa-solid fa-layer-group mr-1 text-brand-500"></i> Formats</a>
+          <a href="#marketplace" class="hover:text-brand-accent transition-colors"><i class="fa-solid fa-newspaper mr-1 text-brand-500"></i> PR Market</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="border-b border-white/5 bg-dark-900/80 backdrop-blur-lg px-4 lg:px-8 py-3.5 sticky top-[37px] z-40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-brand-accent flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-600/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-black tracking-tight text-white flex items-center gap-1">
+            Coinzilla <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-accent border border-brand-500/30">PRO</span>
+          </span>
+          <span class="text-[10px] text-gray-400 font-mono tracking-widest -mt-1">CRYPTO AD NETWORK</span>
+        </div>
+      </a>
+
+      <!-- Desktop Menu Links -->
+      <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-300">
+        <a href="#advertisers" class="hover:text-white transition-colors flex items-center gap-1.5">Advertisers <i class="fa-solid fa-arrow-trend-up text-xs text-brand-500"></i></a>
+        <a href="#publishers" class="hover:text-white transition-colors flex items-center gap-1.5">Publishers <i class="fa-solid fa-coins text-xs text-emerald-400"></i></a>
+        <a href="#formats" class="hover:text-white transition-colors">Ad Formats</a>
+        <a href="#marketplace" class="hover:text-white transition-colors">Press Releases</a>
+        <a href="#calculator" class="hover:text-white transition-colors">Calculator</a>
+        <a href="#dashboard-preview" class="hover:text-white transition-colors">Live Dashboard</a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-3">
+        <button onclick="openAuthModal('signin')" class="text-xs font-semibold text-gray-300 hover:text-white px-3.5 py-2 rounded-lg hover:bg-white/5 transition-all">
+          Sign In
+        </button>
+        <button onclick="openCampaignWizard()" class="text-xs font-bold text-white bg-gradient-to-r from-brand-600 to-blue-500 hover:from-brand-500 hover:to-brand-600 px-4 py-2.5 rounded-xl shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 transition-all flex items-center gap-2">
+          <i class="fa-solid fa-rocket"></i> Create Campaign
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main class="flex-1">
+    
+    <!-- HERO SECTION -->
+    <section class="relative pt-16 pb-20 px-4 lg:px-8 overflow-hidden">
+      <!-- Ambient Background Glows -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-brand-600/15 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Copy Column -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-900/60 border border-brand-500/30 text-brand-accent text-xs font-semibold">
+              <i class="fa-solid fa-shield-halved text-emerald-400"></i> Trusted by 80%+ of Leading Web3, DeFi & CEX Brands
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15]">
+              Join The Top <br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-brand-500 to-blue-400">Finance & Crypto</span> <br />
+              Ad Network
+            </h1>
+
+            <p class="text-base sm:text-lg text-gray-300 max-w-2xl font-normal leading-relaxed">
+              Reach millions of verified crypto traders, Web3 investors, and blockchain enthusiasts. High-visibility IAB standard banners, native sponsored articles, and instant self-serve crypto billing.
+            </p>
+
+            <!-- Dual CTAs -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <button onclick="openCampaignWizard()" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 via-blue-600 to-brand-accent font-bold text-white shadow-xl shadow-brand-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2.5 text-sm">
+                <i class="fa-solid fa-bullhorn"></i> Launch Campaign <span>&rarr;</span>
+              </button>
+              <button onclick="scrollToPublisherCalc()" class="px-6 py-3.5 rounded-xl bg-dark-800 border border-white/10 hover:border-emerald-500/50 hover:bg-dark-700 font-bold text-gray-200 transition-all flex items-center gap-2.5 text-sm">
+                <i class="fa-solid fa-money-bill-trend-up text-emerald-400"></i> Monetize Your Site
+              </button>
+            </div>
+
+            <!-- Network Highlights Badges -->
+            <div class="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/10">
+              <div class="glass-card p-3 rounded-xl">
+                <p class="text-2xl font-black text-white">1B+</p>
+                <p class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold mt-0.5">Monthly Impr.</p>
+              </div>
+              <div class="glass-card p-3 rounded-xl">
+                <p class="text-2xl font-black text-brand-accent">1.8M+</p>
+                <p class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold mt-0.5">Active Clicks</p>
+              </div>
+              <div class="glass-card p-3 rounded-xl">
+                <p class="text-2xl font-black text-emerald-400">650+</p>
+                <p class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold mt-0.5">Vetted Sites</p>
+              </div>
+              <div class="glass-card p-3 rounded-xl">
+                <p class="text-2xl font-black text-purple-400">99.4%</p>
+                <p class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold mt-0.5">Fraud Filtered</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Live Interactive Ad Sandbox Preview -->
+          <div class="lg:col-span-5">
+            <div class="glass-card p-6 rounded-2xl border border-white/10 shadow-2xl relative space-y-5">
+              <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <div class="flex items-center space-x-2">
+                  <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                  <span class="text-xs font-mono text-gray-400 ml-2">Live Ad Placement Simulator</span>
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider bg-brand-500/20 text-brand-accent px-2 py-0.5 rounded border border-brand-500/30">Coinzilla Engine v2.4</span>
+              </div>
+
+              <!-- Format Tab Switcher for Sandbox -->
+              <div class="grid grid-cols-3 gap-1.5 p-1 bg-dark-950 rounded-xl text-xs font-medium text-gray-400">
+                <button onclick="setSandboxFormat('leaderboard')" id="btn-sb-leaderboard" class="py-2 rounded-lg bg-brand-600 text-white font-semibold transition-all">728x90 Banner</button>
+                <button onclick="setSandboxFormat('rectangle')" id="btn-sb-rectangle" class="py-2 rounded-lg hover:text-white transition-all">300x250 Tile</button>
+                <button onclick="setSandboxFormat('native')" id="btn-sb-native" class="py-2 rounded-lg hover:text-white transition-all">Native Card</button>
+              </div>
+
+              <!-- Ad Rendering Canvas -->
+              <div id="sandbox-ad-container" class="min-h-[220px] flex items-center justify-center p-4 bg-dark-950/80 border border-dashed border-white/15 rounded-xl relative overflow-hidden">
+                
+                <!-- 728x90 Preview -->
+                <div id="preview-sb-leaderboard" class="w-full max-w-full bg-gradient-to-r from-dark-800 via-dark-700 to-dark-800 border border-brand-500/40 rounded-lg p-3 flex items-center justify-between shadow-lg relative">
+                  <div class="absolute top-1 right-2 text-[8px] font-mono text-gray-500 uppercase tracking-widest">Ad by Coinzilla</div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-brand-600 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                      <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-bold text-white leading-tight">Next-Gen Non-Custodial Vault</h4>
+                      <p class="text-[10px] text-gray-300">Stake, swap & earn 14.8% APY with multi-chain safety.</p>
+                    </div>
+                  </div>
+                  <button class="px-3 py-1.5 bg-brand-accent text-dark-950 text-[11px] font-extrabold rounded-md shadow hover:opacity-90">
+                    Claim APY
+                  </button>
+                </div>
+
+                <!-- 300x250 Preview (Hidden by default) -->
+                <div id="preview-sb-rectangle" class="hidden w-[300px] bg-gradient-to-b from-dark-800 to-dark-900 border border-brand-500/40 rounded-xl p-4 shadow-xl text-center space-y-3 relative">
+                  <div class="absolute top-1.5 right-2.5 text-[8px] font-mono text-gray-500 uppercase">Coinzilla Ad</div>
+                  <div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center text-white text-xl shadow-lg">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-bold text-white">0% Fee Perpetual DEX</h4>
+                    <p class="text-xs text-gray-300 mt-1">Trade BTC & ETH with up to 100x leverage on Arbitrum.</p>
+                  </div>
+                  <button class="w-full py-2 bg-gradient-to-r from-brand-600 to-blue-500 text-white font-bold text-xs rounded-lg shadow-md">
+                    Start Trading &rarr;
+                  </button>
+                </div>
+
+                <!-- Native Card Preview (Hidden by default) -->
+                <div id="preview-sb-native" class="hidden w-full bg-dark-800/90 border border-white/10 rounded-xl p-3.5 space-y-2 relative">
+                  <div class="flex items-center justify-between text-[10px] text-gray-400">
+                    <span class="bg-brand-500/20 text-brand-accent px-1.5 py-0.5 rounded font-bold font-mono">PROMOTED ARTICLE</span>
+                    <span class="text-gray-500 font-mono">3 min read</span>
+                  </div>
+                  <div class="flex space-x-3 items-center">
+                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex-shrink-0 flex items-center justify-center text-white text-xl font-black">
+                      <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-bold text-white hover:text-brand-accent transition-colors">How Layer-3 Rollups Are Transforming DeFi Yields in 2026</h4>
+                      <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-2">A deep architectural breakdown of zero-knowledge scaling on Ethereum...</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Live Sandbox Telemetry Stats -->
+              <div class="bg-dark-900/90 rounded-xl p-3.5 border border-white/5 grid grid-cols-3 gap-2 text-center text-xs">
+                <div>
+                  <span class="text-gray-400 text-[10px] block">Target Placement</span>
+                  <span class="font-mono font-bold text-white text-xs">Etherscan / Dextools</span>
+                </div>
+                <div>
+                  <span class="text-gray-400 text-[10px] block">Est. CTR</span>
+                  <span class="font-mono font-bold text-emerald-400 text-xs">0.74% (High)</span>
+                </div>
+                <div>
+                  <span class="text-gray-400 text-[10px] block">Device View</span>
+                  <span class="font-mono font-bold text-brand-accent text-xs">Desktop / Mobile</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNER PUBLISHERS LOGO TICKER -->
+    <section class="border-y border-white/5 bg-dark-900/60 py-6 px-4">
+      <div class="max-w-7xl mx-auto">
+        <p class="text-center text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Delivering High-Quality Impressions Across 650+ Premier Crypto Media & Portals</p>
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-70 hover:opacity-100 transition-opacity text-gray-300 font-bold text-sm tracking-wide">
+          <span class="flex items-center gap-2"><i class="fa-brands fa-ethereum text-indigo-400 text-lg"></i> Etherscan.io</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-chart-pie text-cyan-400 text-lg"></i> DEXTools.io</span>
+          <span class="flex items-center gap-2"><i class="fa-brands fa-bitcoin text-amber-400 text-lg"></i> CoinGecko Media</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-500 text-lg"></i> BraveNewCoin</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-shield-virus text-purple-400 text-lg"></i> TheCryptoApp</span>
+          <span class="flex items-center gap-2"><i class="fa-solid fa-vault text-emerald-400 text-lg"></i> Blockchain.com</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE CAMPAIGN ROI & BUDGET CALCULATOR -->
+    <section id="calculator" class="py-20 px-4 lg:px-8 relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-accent text-xs font-bold uppercase">
+            <i class="fa-solid fa-calculator"></i> Traffic & ROI Estimator
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white">Estimate Your Campaign Reach in Real-Time</h2>
+          <p class="text-gray-400 text-sm sm:text-base">Customize your target budget, crypto vertical, and target geography to project impressions, clicks, conversions, and expected cost-per-click.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <!-- Calculator Controls -->
+          <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+            <!-- Vertical Selector -->
+            <div>
+              <label class="text-xs font-bold uppercase tracking-wider text-gray-300 block mb-2">1. Select Crypto Vertical</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-medium">
+                <button onclick="setCalcVertical('defi')" id="btn-v-defi" class="p-3 rounded-xl bg-brand-600 text-white font-bold border border-brand-400 text-center transition-all">
+                  <i class="fa-solid fa-coins block text-base mb-1"></i> DeFi & DEX
+                </button>
+                <button onclick="setCalcVertical('trading')" id="btn-v-trading" class="p-3 rounded-xl bg-dark-900 hover:bg-dark-800 text-gray-300 border border-white/5 text-center transition-all">
+                  <i class="fa-solid fa-chart-candlestick block text-base mb-1"></i> CEX & Trading
+                </button>
+                <button onclick="setCalcVertical('gamefi')" id="btn-v-gamefi" class="p-3 rounded-xl bg-dark-900 hover:bg-dark-800 text-gray-300 border border-white/5 text-center transition-all">
+                  <i class="fa-solid fa-gamepad block text-base mb-1"></i> GameFi & NFT
+                </button>
+                <button onclick="setCalcVertical('fintech')" id="btn-v-fintech" class="p-3 rounded-xl bg-dark-900 hover:bg-dark-800 text-gray-300 border border-white/5 text-center transition-all">
+                  <i class="fa-solid fa-building-columns block text-base mb-1"></i> Web3 / L1-L2
+                </button>
+              </div>
+            </div>
+
+            <!-- Target GEO Selector -->
+            <div>
+              <label class="text-xs font-bold uppercase tracking-wider text-gray-300 block mb-2">2. Target Geography (Tier Pricing)</label>
+              <select id="calc-geo" onchange="recalcProjections()" class="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500">
+                <option value="1.4">Tier 1 Global (USA, UK, Germany, Switzerland, Canada, Singapore)</option>
+                <option value="1.0" selected>Worldwide Distribution (Mixed Tier 1 & 2)</option>
+                <option value="0.8">Tier 2 Emerging (Latin America, Eastern Europe, Southeast Asia)</option>
+                <option value="0.6">Global High-Volume (Tier 3 & Broader Network)</option>
+              </select>
+            </div>
+
+            <!-- Bidding Model -->
+            <div>
+              <label class="text-xs font-bold uppercase tracking-wider text-gray-300 block mb-2">3. Pricing Model</label>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="flex items-center justify-between p-3.5 rounded-xl bg-dark-900 border border-white/10 cursor-pointer hover:border-brand-500">
+                  <div class="flex items-center space-x-2">
+                    <input type="radio" name="calc-model" value="CPM" checked onchange="recalcProjections()" class="text-brand-600 focus:ring-0">
+                    <span class="text-sm font-bold text-white">CPM (Cost per 1,000 Impr.)</span>
+                  </div>
+                  <span class="text-[11px] text-gray-400">Brand Exposure</span>
+                </label>
+                <label class="flex items-center justify-between p-3.5 rounded-xl bg-dark-900 border border-white/10 cursor-pointer hover:border-brand-500">
+                  <div class="flex items-center space-x-2">
+                    <input type="radio" name="calc-model" value="CPC" onchange="recalcProjections()" class="text-brand-600 focus:ring-0">
+                    <span class="text-sm font-bold text-white">CPC (Cost per Click)</span>
+                  </div>
+                  <span class="text-[11px] text-gray-400">Performance</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Budget Slider -->
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-300">4. Daily Budget Allocation</label>
+                <span id="budget-display" class="text-base font-black font-mono text-brand-accent">€500 / day</span>
+              </div>
+              <input type="range" id="calc-budget" min="50" max="10000" step="50" value="500" oninput="onBudgetSliderChange(this.value)" class="w-full h-2 bg-dark-900 rounded-lg appearance-none cursor-pointer accent-brand-500">
+              <div class="flex justify-between text-[11px] text-gray-500 font-mono mt-1">
+                <span>Min: €50</span>
+                <span>€2,500</span>
+                <span>€5,000</span>
+                <span>Max: €10,000+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projected ROI Output Panel -->
+          <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-2xl border border-brand-500/30 bg-gradient-to-b from-dark-850 to-dark-900 space-y-6 shadow-2xl relative">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+              <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-chart-simple text-brand-accent"></i> Estimated Delivery
+              </h3>
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Verified Rates</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+                <span class="text-xs text-gray-400 block mb-1">Estimated Impressions</span>
+                <span id="res-impressions" class="text-2xl font-black font-mono text-white">208,333</span>
+                <span class="text-[10px] text-gray-500 block mt-0.5">per day</span>
+              </div>
+              <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+                <span class="text-xs text-gray-400 block mb-1">Projected Clicks</span>
+                <span id="res-clicks" class="text-2xl font-black font-mono text-brand-accent">1,500</span>
+                <span class="text-[10px] text-gray-500 block mt-0.5">Avg CTR: ~0.72%</span>
+              </div>
+              <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+                <span class="text-xs text-gray-400 block mb-1">Estimated Conversions</span>
+                <span id="res-conversions" class="text-2xl font-black font-mono text-emerald-400">46</span>
+                <span class="text-[10px] text-gray-500 block mt-0.5">Signups / Deposits</span>
+              </div>
+              <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+                <span class="text-xs text-gray-400 block mb-1">Calculated eCPM / CPC</span>
+                <span id="res-cpm-cpc" class="text-2xl font-black font-mono text-purple-400">€2.40</span>
+                <span class="text-[10px] text-gray-500 block mt-0.5" id="res-rate-label">effective CPM</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-brand-900/30 border border-brand-500/30 text-xs text-gray-300 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Campaign Manager:</span>
+                <span class="text-brand-accent font-semibold">Included (1-on-1 Optimization)</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Anti-Fraud Guard:</span>
+                <span class="text-emerald-400 font-semibold">Active (Zero Bot Billing)</span>
+              </div>
+            </div>
+
+            <button onclick="openCampaignWizard()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 via-blue-600 to-brand-accent text-white font-bold text-sm shadow-xl shadow-brand-600/30 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+              Apply This Setup in Campaign Wizard &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AD FORMATS SHOWCASE -->
+    <section id="formats" class="py-20 px-4 lg:px-8 border-t border-white/5 bg-dark-950/60">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-brand-accent text-xs font-bold uppercase">
+            <i class="fa-solid fa-desktop"></i> Display & Native Inventory
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white">High-Performing Web3 Ad Formats</h2>
+          <p class="text-gray-400 text-sm sm:text-base">Choose from standard IAB display banners, non-intrusive native widgets, and mobile-friendly sticky placements designed for maximum conversion.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Format 1 -->
+          <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brand-500/50 transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-brand-accent text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-rectangle-ad"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white">Classic Banners (IAB)</h3>
+              <p class="text-xs text-gray-400 leading-relaxed">728x90 Leaderboard, 300x250 Medium Rectangle, 160x600 Skyscraper, and 320x100 Mobile. Supports static HTML5 and animated GIFs.</p>
+            </div>
+            <div class="pt-4 border-t border-white/5 text-[11px] font-mono text-gray-300 space-y-1">
+              <div class="flex justify-between"><span>Avg CTR:</span> <b class="text-emerald-400">0.55% - 0.90%</b></div>
+              <div class="flex justify-between"><span>Pricing:</span> <b class="text-white">CPM & CPC</b></div>
+            </div>
+          </div>
+
+          <!-- Format 2 -->
+          <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brand-500/50 transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-newspaper"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white">Native Article Ads</h3>
+              <p class="text-xs text-gray-400 leading-relaxed">Seamlessly blends with editorial news feeds on crypto publications. Immune to standard banner blindness with 2.8x higher engagement.</p>
+            </div>
+            <div class="pt-4 border-t border-white/5 text-[11px] font-mono text-gray-300 space-y-1">
+              <div class="flex justify-between"><span>Avg CTR:</span> <b class="text-emerald-400">1.20% - 2.40%</b></div>
+              <div class="flex justify-between"><span>Pricing:</span> <b class="text-white">CPM Optimized</b></div>
+            </div>
+          </div>
+
+          <!-- Format 3 -->
+          <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brand-500/50 transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-anchor"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white">Sticky Header & Footer</h3>
+              <p class="text-xs text-gray-400 leading-relaxed">Fixed floating units at the top or bottom of desktop & mobile screens. Always in the viewport to guarantee continuous viewability.</p>
+            </div>
+            <div class="pt-4 border-t border-white/5 text-[11px] font-mono text-gray-300 space-y-1">
+              <div class="flex justify-between"><span>Avg CTR:</span> <b class="text-emerald-400">0.85% - 1.45%</b></div>
+              <div class="flex justify-between"><span>Pricing:</span> <b class="text-white">CPM</b></div>
+            </div>
+          </div>
+
+          <!-- Format 4 -->
+          <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brand-500/50 transition-all space-y-4 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white">Pop-Under Ads</h3>
+              <p class="text-xs text-gray-400 leading-relaxed">Opens the advertiser landing page in a background window behind the publisher site. Delivers maximum scale at the lowest cost-per-user.</p>
+            </div>
+            <div class="pt-4 border-t border-white/5 text-[11px] font-mono text-gray-300 space-y-1">
+              <div class="flex justify-between"><span>Volume:</span> <b class="text-emerald-400">10M+ Daily</b></div>
+              <div class="flex justify-between"><span>Pricing:</span> <b class="text-white">CPM from €0.80</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESS RELEASE (PR) MARKETPLACE -->
+    <section id="marketplace" class="py-20 px-4 lg:px-8 relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase">
+              <i class="fa-solid fa-bullhorn"></i> Coinzilla Marketplace
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">Crypto Press Release Distribution</h2>
+            <p class="text-gray-400 text-sm max-w-xl">Publish your crypto announcement, token launch, or partnership on top-tier crypto media with guaranteed indexing and do-follow backlinks.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <input type="text" id="pr-search" oninput="filterMarketplace()" placeholder="Search publications (e.g. news, defi)..." class="bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500 w-64">
+          </div>
+        </div>
+
+        <!-- Marketplace Directory Table -->
+        <div class="glass-card rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-dark-950/80 border-b border-white/10 font-bold uppercase text-gray-400 text-[11px] tracking-wider">
+                <tr>
+                  <th class="py-4 px-6">Media Outlet</th>
+                  <th class="py-4 px-4">Category</th>
+                  <th class="py-4 px-4">Monthly Traffic</th>
+                  <th class="py-4 px-4">Domain Authority</th>
+                  <th class="py-4 px-4">Turnaround</th>
+                  <th class="py-4 px-4">Price</th>
+                  <th class="py-4 px-6 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="pr-table-body" class="divide-y divide-white/5 font-medium text-gray-200">
+                <!-- Rendered dynamically by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLISHER MONETIZATION CALCULATOR & CODE GENERATOR -->
+    <section id="publishers" class="py-20 px-4 lg:px-8 border-t border-white/5 bg-dark-950/70 relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase">
+              <i class="fa-solid fa-coins"></i> For Webmasters & Publishers
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">
+              Monetize Your Crypto Site with Premium Ads
+            </h2>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Gain access to verified global crypto advertisers. Enjoy high fill rates up to 99%, flexible payouts in Bitcoin, Ethereum, USDT, or SEPA Bank Transfer with a low minimum threshold of €50.
+            </p>
+
+            <!-- Publisher Traffic Estimator -->
+            <div class="glass-card p-6 rounded-2xl border border-emerald-500/30 space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold uppercase text-gray-300">Monthly Pageviews:</span>
+                <span id="pub-pv-display" class="text-sm font-black font-mono text-emerald-400">500,000 PV</span>
+              </div>
+              <input type="range" id="pub-pv-slider" min="50000" max="5000000" step="50000" value="500000" oninput="updatePublisherEarnings(this.value)" class="w-full h-2 bg-dark-900 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+              
+              <div class="p-4 rounded-xl bg-dark-950 border border-white/5 flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] text-gray-400 block">Est. Monthly Revenue:</span>
+                  <span id="pub-earnings-val" class="text-2xl font-black font-mono text-emerald-400">€1,450.00</span>
+                </div>
+                <button onclick="generatePublisherTag()" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg transition-all">
+                  Get Ad Tag Code
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Embed Code Preview Generator -->
+          <div class="lg:col-span-6 glass-card p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <span class="text-xs font-mono font-bold text-gray-300 flex items-center gap-2">
+                <i class="fa-solid fa-code text-brand-accent"></i> Async Ad Tag Integration Snippet
+              </span>
+              <button onclick="copyPublisherCode()" class="text-xs font-bold text-brand-accent hover:text-white transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-copy"></i> <span id="copy-btn-text">Copy Tag</span>
+              </button>
+            </div>
+
+            <div class="relative">
+              <pre class="bg-dark-950 p-4 rounded-xl text-emerald-400 font-mono text-xs overflow-x-auto leading-relaxed border border-white/5" id="publisher-code-snippet"><!-- Coinzilla Banner Zone [728x90] -->
+<script async src="https://coinzilla.com/assets/js/coinzilla-async.js"></script>
+<div class="coinzilla-zone" data-zone="cz_849204_leaderboard" data-size="728x90"></div>
+<script>
+  window.coinzillaAsync = window.coinzillaAsync || [];
+  coinzillaAsync.push({ zone: 'cz_849204_leaderboard' });
+</script></pre>
+            </div>
+
+            <div class="text-[11px] text-gray-400 space-y-1.5 pt-2">
+              <p><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Fully asynchronous non-blocking script (under 12KB gzip).</p>
+              <p><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Automatic fallback monetization for unsold geo inventories.</p>
+              <p><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Built-in compliance with Google Search & Web3 standards.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE DEMO ADVERTISER DASHBOARD PREVIEW -->
+    <section id="dashboard-preview" class="py-20 px-4 lg:px-8 relative">
+      <div class="max-w-7xl mx-auto space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-accent text-xs font-bold uppercase">
+              <i class="fa-solid fa-gauge-high"></i> Advertiser Portal Demo
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">Real-Time Campaign Analytics</h2>
+            <p class="text-gray-400 text-sm max-w-xl">Experience the live self-serve telemetry: monitor live CTRs, adjust bids, inspect conversions, and export performance reports.</p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button onclick="addNewDemoCampaign()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-brand-600/20 transition-all">
+              <i class="fa-solid fa-plus"></i> Quick Campaign
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Dashboard Box -->
+        <div class="glass-card p-6 rounded-2xl border border-white/10 space-y-6 shadow-2xl">
+          <!-- Mini Stat Cards -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+              <div class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                <span>Total Impressions</span>
+                <i class="fa-solid fa-eye text-brand-500"></i>
+              </div>
+              <span class="text-2xl font-black font-mono text-white" id="dash-stat-impr">1,489,240</span>
+              <span class="text-[10px] text-emerald-400 font-mono block mt-0.5">+12.8% vs last week</span>
+            </div>
+            <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+              <div class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                <span>Total Clicks</span>
+                <i class="fa-solid fa-mouse-pointer text-brand-accent"></i>
+              </div>
+              <span class="text-2xl font-black font-mono text-brand-accent" id="dash-stat-clicks">12,658</span>
+              <span class="text-[10px] text-emerald-400 font-mono block mt-0.5">Avg CTR: 0.85%</span>
+            </div>
+            <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+              <div class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                <span>Active Spend</span>
+                <i class="fa-solid fa-wallet text-purple-400"></i>
+              </div>
+              <span class="text-2xl font-black font-mono text-purple-400" id="dash-stat-spend">€3,480.00</span>
+              <span class="text-[10px] text-gray-400 font-mono block mt-0.5">Budget cap: €5,000</span>
+            </div>
+            <div class="bg-dark-950/80 p-4 rounded-xl border border-white/5">
+              <div class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                <span>Conversions (CPA)</span>
+                <i class="fa-solid fa-user-check text-emerald-400"></i>
+              </div>
+              <span class="text-2xl font-black font-mono text-emerald-400" id="dash-stat-conv">412</span>
+              <span class="text-[10px] text-emerald-400 font-mono block mt-0.5">Avg Cost: €8.44</span>
+            </div>
+          </div>
+
+          <!-- Campaigns Data Table -->
+          <div class="border border-white/5 rounded-xl overflow-hidden">
+            <div class="p-4 bg-dark-950/90 border-b border-white/5 flex items-center justify-between">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-300">Active Campaigns Telemetry</h4>
+              <span class="text-[10px] text-gray-400 font-mono">Updated real-time</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-dark-950/50 border-b border-white/5 font-semibold text-gray-400 text-[11px]">
+                  <tr>
+                    <th class="py-3 px-4">Campaign Name</th>
+                    <th class="py-3 px-3">Format</th>
+                    <th class="py-3 px-3">Pricing</th>
+                    <th class="py-3 px-3">Impressions</th>
+                    <th class="py-3 px-3">Clicks</th>
+                    <th class="py-3 px-3">CTR</th>
+                    <th class="py-3 px-3">Spent</th>
+                    <th class="py-3 px-3">Status</th>
+                    <th class="py-3 px-4 text-right">Toggle</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-campaigns-body" class="divide-y divide-white/5 font-mono text-gray-300">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRAUD SHIELD & SECURITY MODULE -->
+    <section class="py-20 px-4 lg:px-8 border-t border-white/5 bg-dark-950/60">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold uppercase">
+              <i class="fa-solid fa-shield-halved"></i> Anti-Fraud Shield
+            </div>
+            <h2 class="text-3xl font-black text-white">Coinzilla Proprietary Bot Filter</h2>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              We enforce multi-tiered IP scoring, click velocity modeling, and headless browser fingerprinting to discard invalid traffic automatically before billing.
+            </p>
+            <div class="space-y-2 pt-2 text-xs text-gray-300">
+              <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Residential & Datacenter Proxy Traps</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> User Interaction & Scroll Telemetry Verification</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Automatic Refund on Flagged Click Spikes</div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-300">Live Anti-Fraud Real-Time Inspection</h4>
+            <div class="grid grid-cols-3 gap-3 text-center text-xs font-mono">
+              <div class="p-3 bg-dark-900 rounded-xl border border-white/5">
+                <span class="text-[10px] text-gray-400 block">Scanned Requests</span>
+                <span class="text-lg font-black text-white">24,192,800</span>
+              </div>
+              <div class="p-3 bg-dark-900 rounded-xl border border-white/5">
+                <span class="text-[10px] text-gray-400 block">Bot Hits Discarded</span>
+                <span class="text-lg font-black text-red-400">382,104</span>
+              </div>
+              <div class="p-3 bg-dark-900 rounded-xl border border-white/5">
+                <span class="text-[10px] text-gray-400 block">Clean Traffic Rate</span>
+                <span class="text-lg font-black text-emerald-400">98.42%</span>
+              </div>
+            </div>
+            <div class="p-3 bg-dark-950 rounded-xl border border-white/5 text-[11px] font-mono text-gray-400 flex items-center justify-between">
+              <span><i class="fa-solid fa-lock text-brand-accent mr-1"></i> Strict IAB Compliance & Fraud-Free Guarantee</span>
+              <span class="text-emerald-400 font-bold">PROTECTED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: CAMPAIGN CREATION WIZARD -->
+  <div id="campaign-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="glass-card w-full max-w-3xl rounded-2xl border border-brand-500/40 p-6 sm:p-8 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in duration-150">
+      
+      <div class="flex justify-between items-center border-b border-white/10 pb-4">
+        <div>
+          <h3 class="text-xl font-black text-white flex items-center gap-2">
+            <i class="fa-solid fa-rocket text-brand-500"></i> Launch New Advertising Campaign
+          </h3>
+          <p class="text-xs text-gray-400">Self-serve instant campaign setup with crypto payment settlement.</p>
+        </div>
+        <button onclick="closeCampaignWizard()" class="text-gray-400 hover:text-white text-lg p-1.5 rounded-lg hover:bg-white/5 transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Wizard Steps Progress -->
+      <div class="flex items-center justify-between text-xs font-bold border-b border-white/5 pb-4">
+        <div class="flex items-center space-x-2 text-brand-accent">
+          <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-xs">1</span>
+          <span>Objective & Info</span>
+        </div>
+        <div class="h-[1px] flex-1 bg-white/10 mx-3"></div>
+        <div class="flex items-center space-x-2 text-gray-400">
+          <span class="w-6 h-6 rounded-full bg-dark-900 border border-white/10 text-gray-400 flex items-center justify-center text-xs">2</span>
+          <span>Creative & Copy</span>
+        </div>
+        <div class="h-[1px] flex-1 bg-white/10 mx-3"></div>
+        <div class="flex items-center space-x-2 text-gray-400">
+          <span class="w-6 h-6 rounded-full bg-dark-900 border border-white/10 text-gray-400 flex items-center justify-center text-xs">3</span>
+          <span>Budget & Crypto Pay</span>
+        </div>
+      </div>
+
+      <!-- Wizard Form -->
+      <form id="campaign-wizard-form" onsubmit="submitNewCampaign(event)" class="space-y-4 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-gray-300 font-semibold block mb-1.5">Campaign Title</label>
+            <input type="text" id="wiz-title" required placeholder="e.g. DeFi Staking Summer Promotion" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+          </div>
+          <div>
+            <label class="text-gray-300 font-semibold block mb-1.5">Target URL (Tracking Link)</label>
+            <input type="url" id="wiz-url" required placeholder="https://yourproject.io/app?ref=coinzilla" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-gray-300 font-semibold block mb-1.5">Ad Format</label>
+            <select id="wiz-format" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+              <option value="Classic 728x90 Banner">Classic 728x90 Leaderboard</option>
+              <option value="Rectangle 300x250">Medium Rectangle 300x250</option>
+              <option value="Native Card">Native Feed Recommendation</option>
+              <option value="Sticky Footer Banner">Sticky Footer Bar</option>
+              <option value="Pop-Under">Pop-Under URL Redirect</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-gray-300 font-semibold block mb-1.5">Objective</label>
+            <select id="wiz-objective" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+              <option value="Direct Traffic">Drive Qualified Traffic</option>
+              <option value="Brand Awareness">Maximum Brand Awareness</option>
+              <option value="Token Launch">Token / IDO Launch</option>
+              <option value="App Installs">Telegram Mini-App / Wallet Installs</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-gray-300 font-semibold block mb-1.5">Daily Budget (EUR)</label>
+            <input type="number" id="wiz-budget" min="50" required value="250" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+          </div>
+          <div>
+            <label class="text-gray-300 font-semibold block mb-1.5">Payment Method</label>
+            <select id="wiz-payment" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+              <option value="USDT-ERC20">USDT (Tether ERC-20 / TRC-20)</option>
+              <option value="BTC">Bitcoin (BTC Instant Invoice)</option>
+              <option value="ETH">Ethereum (ETH / Base / Arbitrum)</option>
+              <option value="CARD">Credit Card / SEPA Bank Wire</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-white/10 flex items-center justify-end space-x-3">
+          <button type="button" onclick="closeCampaignWizard()" class="px-4 py-2.5 rounded-xl bg-dark-900 hover:bg-dark-800 text-gray-300 font-semibold">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-blue-500 hover:from-brand-500 hover:to-brand-600 text-white font-bold shadow-lg shadow-brand-600/30 transition-all">
+            Launch & Deploy Campaign &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: AUTHENTICATION (SIGN IN / SIGN UP) -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-2xl border border-white/10 p-6 sm:p-8 space-y-5 shadow-2xl relative">
+      <div class="flex justify-between items-center border-b border-white/10 pb-3">
+        <h3 class="text-lg font-bold text-white" id="auth-title">Sign In to Coinzilla</h3>
+        <button onclick="closeAuthModal()" class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/5">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form onsubmit="handleAuthSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="text-gray-300 font-semibold block mb-1">Email Address</label>
+          <input type="email" required placeholder="you@project.com" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+        </div>
+        <div>
+          <label class="text-gray-300 font-semibold block mb-1">Password</label>
+          <input type="password" required placeholder="••••••••••••" class="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-brand-500">
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-blue-500 text-white font-bold shadow-lg shadow-brand-600/30 transition-all">
+          Continue &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-dark-950 py-12 px-4 lg:px-8 text-xs text-gray-400 mt-16">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white font-black text-sm">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <span class="text-base font-black text-white">Coinzilla</span>
+        </div>
+        <p class="text-gray-400 text-xs leading-relaxed">
+          Part of the Sevio Advertising Technology network. Empowering cryptocurrency, DeFi, and finance platforms with targeted global reach since 2016.
+        </p>
+        <p class="text-[11px] text-gray-500 font-mono">&copy; 2026 Coinzilla by Sevio Solutions. All rights reserved.</p>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-white">For Advertisers</h4>
+        <ul class="space-y-1.5">
+          <li><a href="#calculator" class="hover:text-white transition-colors">ROI & Reach Calculator</a></li>
+          <li><a href="#formats" class="hover:text-white transition-colors">Display & Native Formats</a></li>
+          <li><a href="#marketplace" class="hover:text-white transition-colors">Press Release Distribution</a></li>
+          <li><a href="#" onclick="openCampaignWizard()" class="hover:text-white transition-colors">Self-Serve Studio</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-white">For Publishers</h4>
+        <ul class="space-y-1.5">
+          <li><a href="#publishers" class="hover:text-white transition-colors">Monetize Web Traffic</a></li>
+          <li><a href="#publishers" class="hover:text-white transition-colors">Async Integration Tag</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">CPM & CPC Payout Rates</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Fast Crypto Settlements</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-white">Compliance & Technology</h4>
+        <ul class="space-y-1.5">
+          <li><a href="#" class="hover:text-white transition-colors">Anti-Bot Fraud Prevention</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">IAB Standard Guidelines</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Privacy & Cookie Policy</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">API Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // GLOBAL STATE
+    let selectedCurrency = 'EUR';
+    let currencyMultipliers = { EUR: 1, USD: 1.08, BTC: 0.000017, ETH: 0.00031, USDT: 1.08 };
+    let currencySymbols = { EUR: '€', USD: '$', BTC: '₿', ETH: 'Ξ', USDT: '₮' };
+    let currentVertical = 'defi';
+
+    // Press release mock database
+    const prPublications = [
+      { id: 'pr-1', name: 'CoinTelegraph Global Media', domain: 'cointelegraph.com', traffic: '12.4M', da: 86, priceEur: 2850, category: 'Top News', turnaround: 1 },
+      { id: 'pr-2', name: 'Etherscan Featured Article', domain: 'etherscan.io', traffic: '18.9M', da: 91, priceEur: 3200, category: 'Explorer / Data', turnaround: 2 },
+      { id: 'pr-3', name: 'DEXTools Sponsored Spotlight', domain: 'dextools.io', traffic: '14.2M', da: 74, priceEur: 1950, category: 'Trading / DEX', turnaround: 1 },
+      { id: 'pr-4', name: 'BraveNewCoin Research', domain: 'bravenewcoin.com', traffic: '2.1M', da: 68, priceEur: 750, category: 'Analysis', turnaround: 1 },
+      { id: 'pr-5', name: 'TheCryptoApp News Wire', domain: 'thecryptoapp.com', traffic: '3.8M', da: 65, priceEur: 890, category: 'Mobile / News', turnaround: 2 },
+      { id: 'pr-6', name: 'Blockspot Industry Insight', domain: 'blockspot.io', traffic: '1.2M', da: 62, priceEur: 450, category: 'Directory', turnaround: 1 }
+    ];
+
+    // Live Demo Campaigns Data
+    let demoCampaigns = [
+      { id: 1, name: 'DeFi Liquidity Pool V3 Launch', format: 'Classic 728x90', model: 'CPM', impressions: '540,200', clicks: '4,105', ctr: '0.76%', spent: '€1,296.48', active: true },
+      { id: 2, name: 'Cross-Chain Bridge Adoption', format: 'Native Card', model: 'CPC', impressions: '380,410', clicks: '5,320', ctr: '1.40%', spent: '€1,170.40', active: true },
+      { id: 3, name: 'Perpetual DEX Referral Promo', format: 'Sticky Footer', model: 'CPM', impressions: '568,630', clicks: '3,233', ctr: '0.57%', spent: '€1,013.12', active: false }
+    ];
+
+    // INITIALIZATION
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMarketplaceTable(prPublications);
+      renderDashboardTable();
+      recalcProjections();
+      updatePublisherEarnings(500000);
+    });
+
+    // TOAST NOTIFIER
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bg = type === 'success' ? 'bg-emerald-600' : 'bg-brand-600';
+      toast.className = `${bg} text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow-2xl flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 20);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // CURRENCY SWITCHER
+    function updateGlobalCurrency(curr) {
+      selectedCurrency = curr;
+      recalcProjections();
+      updatePublisherEarnings(document.getElementById('pub-pv-slider').value);
+      showToast(`Currency changed to ${curr}`);
+    }
+
+    // SANDBOX AD FORMAT TOGGLER
+    function setSandboxFormat(format) {
+      document.getElementById('preview-sb-leaderboard').classList.add('hidden');
+      document.getElementById('preview-sb-rectangle').classList.add('hidden');
+      document.getElementById('preview-sb-native').classList.add('hidden');
+
+      document.getElementById('btn-sb-leaderboard').className = 'py-2 rounded-lg hover:text-white transition-all';
+      document.getElementById('btn-sb-rectangle').className = 'py-2 rounded-lg hover:text-white transition-all';
+      document.getElementById('btn-sb-native').className = 'py-2 rounded-lg hover:text-white transition-all';
+
+      if (format === 'leaderboard') {
+        document.getElementById('preview-sb-leaderboard').classList.remove('hidden');
+        document.getElementById('btn-sb-leaderboard').className = 'py-2 rounded-lg bg-brand-600 text-white font-semibold transition-all';
+      } else if (format === 'rectangle') {
+        document.getElementById('preview-sb-rectangle').classList.remove('hidden');
+        document.getElementById('btn-sb-rectangle').className = 'py-2 rounded-lg bg-brand-600 text-white font-semibold transition-all';
+      } else if (format === 'native') {
+        document.getElementById('preview-sb-native').classList.remove('hidden');
+        document.getElementById('btn-sb-native').className = 'py-2 rounded-lg bg-brand-600 text-white font-semibold transition-all';
+      }
+    }
+
+    // ROI ESTIMATOR LOGIC
+    function setCalcVertical(vert) {
+      currentVertical = vert;
+      ['defi', 'trading', 'gamefi', 'fintech'].forEach(v => {
+        const btn = document.getElementById(`btn-v-${v}`);
+        if (v === vert) {
+          btn.className = 'p-3 rounded-xl bg-brand-600 text-white font-bold border border-brand-400 text-center transition-all';
+        } else {
+          btn.className = 'p-3 rounded-xl bg-dark-900 hover:bg-dark-800 text-gray-300 border border-white/5 text-center transition-all';
+        }
+      });
+      recalcProjections();
+    }
+
+    function onBudgetSliderChange(val) {
+      const sym = currencySymbols[selectedCurrency];
+      const convertedVal = Math.round(val * currencyMultipliers[selectedCurrency]);
+      document.getElementById('budget-display').innerText = `${sym}${convertedVal.toLocaleString()} / day`;
+      recalcProjections();
+    }
+
+    function recalcProjections() {
+      const rawBudget = parseFloat(document.getElementById('calc-budget').value);
+      const geoMultiplier = parseFloat(document.getElementById('calc-geo').value);
+      const pricingModel = document.querySelector('input[name="calc-model"]:checked').value;
+
+      let baseCpm = 2.40;
+      let baseCpc = 0.35;
+      let ctr = 0.72;
+      let convRate = 2.4;
+
+      if (currentVertical === 'trading') {
+        baseCpm = 3.10;
+        baseCpc = 0.44;
+        ctr = 0.82;
+        convRate = 3.2;
+      } else if (currentVertical === 'gamefi') {
+        baseCpm = 1.60;
+        baseCpc = 0.22;
+        ctr = 0.95;
+        convRate = 1.9;
+      } else if (currentVertical === 'fintech') {
+        baseCpm = 2.80;
+        baseCpc = 0.40;
+        ctr = 0.68;
+        convRate = 2.8;
+      }
+
+      const effCpm = +(baseCpm * geoMultiplier).toFixed(2);
+      const effCpc = +(baseCpc * geoMultiplier).toFixed(2);
+
+      let impressions = 0;
+      let clicks = 0;
+
+      if (pricingModel === 'CPM') {
+        impressions = Math.floor((rawBudget / effCpm) * 1000);
+        clicks = Math.floor(impressions * (ctr / 100));
+        document.getElementById('res-rate-label').innerText = 'effective CPM';
+        document.getElementById('res-cpm-cpc').innerText = `${currencySymbols[selectedCurrency]}${effCpm.toFixed(2)}`;
+      } else {
+        clicks = Math.floor(rawBudget / effCpc);
+        impressions = Math.floor(clicks / (ctr / 100));
+        document.getElementById('res-rate-label').innerText = 'effective CPC';
+        document.getElementById('res-cpm-cpc').innerText = `${currencySymbols[selectedCurrency]}${effCpc.toFixed(2)}`;
+      }
+
+      const conversions = Math.floor(clicks * (convRate / 100));
+
+      document.getElementById('res-impressions').innerText = impressions.toLocaleString();
+      document.getElementById('res-clicks').innerText = clicks.toLocaleString();
+      document.getElementById('res-conversions').innerText = conversions.toLocaleString();
+    }
+
+    // PUBLISHER EARNINGS LOGIC
+    function updatePublisherEarnings(pageviews) {
+      document.getElementById('pub-pv-display').innerText = `${parseInt(pageviews).toLocaleString()} PV`;
+      const estimatedEarningsEur = (pageviews / 1000) * 2.90;
+      const sym = currencySymbols[selectedCurrency];
+      const mult = currencyMultipliers[selectedCurrency];
+      const converted = (estimatedEarningsEur * mult).toFixed(2);
+      document.getElementById('pub-earnings-val').innerText = `${sym}${parseFloat(converted).toLocaleString()}`;
+    }
+
+    function generatePublisherTag() {
+      showToast('Generated fresh async zone snippet');
+    }
+
+    function copyPublisherCode() {
+      const snippet = document.getElementById('publisher-code-snippet').innerText;
+      navigator.clipboard.writeText(snippet).then(() => {
+        document.getElementById('copy-btn-text').innerText = 'Copied!';
+        showToast('Ad snippet copied to clipboard');
+        setTimeout(() => {
+          document.getElementById('copy-btn-text').innerText = 'Copy Tag';
+        }, 2000);
+      });
+    }
+
+    function scrollToPublisherCalc() {
+      document.getElementById('publishers').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // MARKETPLACE LOGIC
+    function renderMarketplaceTable(items) {
+      const tbody = document.getElementById('pr-table-body');
+      tbody.innerHTML = '';
+      items.forEach(pub => {
+        const sym = currencySymbols[selectedCurrency];
+        const convertedPrice = Math.round(pub.priceEur * currencyMultipliers[selectedCurrency]);
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-dark-900/60 transition-colors';
+        tr.innerHTML = `
+          <td class="py-4 px-6">
+            <div class="font-bold text-white text-sm">${pub.name}</div>
+            <span class="text-[11px] text-gray-500 font-mono">${pub.domain}</span>
+          </td>
+          <td class="py-4 px-4"><span class="px-2 py-0.5 rounded bg-brand-500/10 text-brand-accent border border-brand-500/20 text-[10px] font-semibold">${pub.category}</span></td>
+          <td class="py-4 px-4 font-mono font-bold text-white">${pub.traffic}</td>
+          <td class="py-4 px-4 font-mono font-bold text-emerald-400">DA ${pub.da}</td>
+          <td class="py-4 px-4 text-gray-300">${pub.turnaround} Business Day</td>
+          <td class="py-4 px-4 font-mono font-black text-white text-sm">${sym}${convertedPrice.toLocaleString()}</td>
+          <td class="py-4 px-6 text-right">
+            <button onclick="bookPrPackage('${pub.name}')" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs transition-all shadow">
+              Book Press Release
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterMarketplace() {
+      const term = document.getElementById('pr-search').value.toLowerCase();
+      const filtered = prPublications.filter(p => 
+        p.name.toLowerCase().includes(term) || 
+        p.domain.toLowerCase().includes(term) || 
+        p.category.toLowerCase().includes(term)
+      );
+      renderMarketplaceTable(filtered);
+    }
+
+    function bookPrPackage(name) {
+      showToast(`Selected PR package on ${name}. Opening order summary...`);
+    }
+
+    // DASHBOARD TELEMETRY TABLE
+    function renderDashboardTable() {
+      const tbody = document.getElementById('dashboard-campaigns-body');
+      tbody.innerHTML = '';
+      demoCampaigns.forEach((camp, index) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-dark-950/40 transition-colors';
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-sans font-bold text-white">${camp.name}</td>
+          <td class="py-3 px-3 text-[11px] text-gray-400">${camp.format}</td>
+          <td class="py-3 px-3 text-brand-accent font-semibold">${camp.model}</td>
+          <td class="py-3 px-3">${camp.impressions}</td>
+          <td class="py-3 px-3 text-brand-500 font-bold">${camp.clicks}</td>
+          <td class="py-3 px-3 text-emerald-400">${camp.ctr}</td>
+          <td class="py-3 px-3 font-bold text-white">${camp.spent}</td>
+          <td class="py-3 px-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${camp.active ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'}">
+              ${camp.active ? 'ACTIVE' : 'PAUSED'}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-right">
+            <button onclick="toggleCampaignStatus(${index})" class="text-xs font-semibold px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-gray-200 transition-colors">
+              ${camp.active ? '<i class="fa-solid fa-pause mr-1"></i> Pause' : '<i class="fa-solid fa-play mr-1 text-emerald-400"></i> Resume'}
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleCampaignStatus(index) {
+      demoCampaigns[index].active = !demoCampaigns[index].active;
+      renderDashboardTable();
+      showToast(`Campaign "${demoCampaigns[index].name}" ${demoCampaigns[index].active ? 'resumed' : 'paused'}`);
+    }
+
+    function addNewDemoCampaign() {
+      openCampaignWizard();
+    }
+
+    // MODAL CONTROL & FORM SUBMISSIONS
+    function openCampaignWizard() {
+      document.getElementById('campaign-modal').classList.remove('hidden');
+      document.getElementById('campaign-modal').classList.add('flex');
+    }
+
+    function closeCampaignWizard() {
+      document.getElementById('campaign-modal').classList.add('hidden');
+      document.getElementById('campaign-modal').classList.remove('flex');
+    }
+
+    function submitNewCampaign(e) {
+      e.preventDefault();
+      const title = document.getElementById('wiz-title').value;
+      const format = document.getElementById('wiz-format').value;
+      const budget = document.getElementById('wiz-budget').value;
+      
+      demoCampaigns.unshift({
+        id: Date.now(),
+        name: title,
+        format: format,
+        model: 'CPM',
+        impressions: '0',
+        clicks: '0',
+        ctr: '0.00%',
+        spent: `€0.00`,
+        active: true
+      });
+
+      renderDashboardTable();
+      closeCampaignWizard();
+      showToast(`Campaign "${title}" successfully launched!`);
+      document.getElementById('dashboard-preview').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function openAuthModal(mode) {
+      document.getElementById('auth-modal').classList.remove('hidden');
+      document.getElementById('auth-modal').classList.add('flex');
+      document.getElementById('auth-title').innerText = mode === 'signin' ? 'Sign In to Coinzilla' : 'Create Advertiser Account';
+    }
+
+    function closeAuthModal() {
+      document.getElementById('auth-modal').classList.add('hidden');
+      document.getElementById('auth-modal').classList.remove('flex');
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      closeAuthModal();
+      showToast('Authenticated successfully! Welcome back to Coinzilla.');
+    }
+  </script>
+</body>
+</html>
